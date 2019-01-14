@@ -1,0 +1,12 @@
+C:\Users\Professional\Desktop\ThermalCalc\ThermalCalc.DataLayer\bin\Release\ThermalCalc.DataLayer.dll.config
+C:\Users\Professional\Desktop\ThermalCalc\ThermalCalc.DataLayer\bin\Release\ThermalCalc.DataLayer.dll
+C:\Users\Professional\Desktop\ThermalCalc\ThermalCalc.DataLayer\bin\Release\ThermalCalc.DataLayer.pdb
+C:\Users\Professional\Desktop\ThermalCalc\ThermalCalc.DataLayer\bin\Release\EntityFramework.dll
+C:\Users\Professional\Desktop\ThermalCalc\ThermalCalc.DataLayer\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Professional\Desktop\ThermalCalc\ThermalCalc.DataLayer\bin\Release\EntityFramework.xml
+C:\Users\Professional\Desktop\ThermalCalc\ThermalCalc.DataLayer\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Professional\Desktop\ThermalCalc\ThermalCalc.DataLayer\obj\Release\ThermalCalc.DataLayer.csprojAssemblyReference.cache
+C:\Users\Professional\Desktop\ThermalCalc\ThermalCalc.DataLayer\obj\Release\ThermalCalc.DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\Professional\Desktop\ThermalCalc\ThermalCalc.DataLayer\obj\Release\ThermalCalc.DataLayer.csproj.CopyComplete
+C:\Users\Professional\Desktop\ThermalCalc\ThermalCalc.DataLayer\obj\Release\ThermalCalc.DataLayer.dll
+C:\Users\Professional\Desktop\ThermalCalc\ThermalCalc.DataLayer\obj\Release\ThermalCalc.DataLayer.pdb

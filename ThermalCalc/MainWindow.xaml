@@ -1,0 +1,215 @@
+﻿<Window x:Class="ThermalCalc.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ThermalCalc"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Теплотехнический расчет ограждающих конструкций" Height="500" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Menu>
+            <MenuItem Header="_Файл">
+                <MenuItem Header="_Сохранить БД в XML"
+                          Click="saveToXML"/>
+                <Separator />
+                <!--<MenuItem Header="_Загрузить БД из XML"
+                          Click="openFromXML"/>-->
+            </MenuItem>
+
+            <MenuItem Header="Добавить">
+                <MenuItem Header="Тип здания" Click="addBuildingType"/>
+                <MenuItem Header="Город" Click="addCity"/>
+                <MenuItem Header="Материал" Click="addMaterial"/>
+                <MenuItem Header="Ограждающая конструкция" Click="addES" />
+            </MenuItem>
+
+            <MenuItem Header="Изменить">
+                <MenuItem Header="Тип здания" Click="editBuildingType" />
+                <MenuItem Header="Город" Click="editCity" />
+                <MenuItem Header="Материал" Click="editMaterial" />
+                <MenuItem Header="Ограждающая конструкция" Click="editES" />
+            </MenuItem>
+
+            <MenuItem Header="Удалить">
+                <MenuItem Header="Тип здания" Click="editBuildingType" />
+                <MenuItem Header="Город" Click="editCity"/>
+                <MenuItem Header="Материал" Click="editMaterial"/>
+                <MenuItem Header="Ограждающая конструкция" Click="deleteES" />
+            </MenuItem>
+
+            <MenuItem Header="Просмотреть список">
+                <MenuItem Header="Тип здания" Click="editBuildingType" />
+                <MenuItem Header="Город" Click="editCity"/>
+                <MenuItem Header="Материал" Click="editMaterial"/>
+            </MenuItem>
+        </Menu>
+
+        <ToolBar Grid.Row="1">
+            <Button Click="addChart">
+                <Image Height="30" Width="30"
+                       Source="Images/chartImage.png" />
+            </Button>
+            <Button Click="addBuildingType">
+                <Image Height="30" Width="30"
+                       Source="Images/add_BT.png" />
+            </Button>
+            <Button Click="addCity">
+                <Image Height="30" Width="30"
+                       Source="Images/add_City.png" />
+            </Button>
+            <Button Click="addMaterial">
+                <Image Height="30" Width="30"
+                       Source="Images/add_Mat.png" />
+            </Button>
+            <Button Click="addES">
+                <Image Height="30" Width="30"
+                       Source="Images/add_ES.png" />
+            </Button>
+        </ToolBar>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <Label>Выберите огр. конструкцию:</Label>
+
+                <ComboBox x:Name="cBoxES"
+                      Margin="0 10 10 10"
+                      DisplayMemberPath="ESName"
+                      ItemsSource="{Binding}"
+                      SelectedValuePath="EnclosingStructureId"
+                      SelectedIndex="0" />
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Margin="10">Тип здания:</TextBlock>
+                    <TextBlock Text="{Binding ElementName=cBoxES,
+                                      Path=SelectedItem.BuildingType.TypeName}"
+                               Margin="10" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Margin="10">Город:</TextBlock>
+                    <TextBlock Text="{Binding ElementName=cBoxES,
+                                      Path=SelectedItem.City.CityName}"
+                               Margin="10" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Margin="10">Год постройки:</TextBlock>
+                    <TextBlock Text="{Binding ElementName=cBoxES,
+                                      Path=SelectedItem.Year}"
+                               Margin="10" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Margin="10">Режим эксплуатации:</TextBlock>
+                    <TextBlock Text="{Binding ElementName=cBoxES,
+                                      Path=SelectedItem.OperatingMode}"
+                               Margin="10" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Margin="10">Rтр., м2*С/Вт</TextBlock>
+                    <TextBlock Text="{Binding ElementName=cBoxES,
+                                      Path=SelectedItem.RRequired,
+                                      StringFormat={}{0:F3}}"
+                               FontStyle="Italic"
+                               FontWeight="Bold"
+                               Foreground="Blue"
+                               Margin="10" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Margin="10">Rпр., м2*С/Вт</TextBlock>
+                    <TextBlock Text="{Binding ElementName=cBoxES,
+                                      Path=SelectedItem.RReduced,
+                                      StringFormat={}{0:F3}}"
+                               FontStyle="Italic"
+                               FontWeight="Bold"
+                               Foreground="Blue"
+                               Margin="10" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Margin="10">D</TextBlock>
+                    <TextBlock Text="{Binding ElementName=cBoxES,
+                                      Path=SelectedItem.ThermalInertia,
+                                      StringFormat={}{0:F3}}"
+                               FontStyle="Italic"
+                               FontWeight="Bold"
+                               Foreground="Blue"
+                               Margin="10" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                    <Button Click="addLayer"
+                            Content="Добавить слой"
+                            Margin="5"/>
+                    <Button Click="editLayer"
+                            Content="Изменить слой"
+                            Margin="5"/>
+                    <Button Click="deleteLayer"
+                            Content="Удалить слой"
+                            Margin="5"/>
+                </StackPanel>
+            </Grid>
+
+            <DataGrid Grid.Row="3"
+                      x:Name="esmDataGrid"
+                      DataContext="{Binding ElementName=cBoxES,
+                                            Path=SelectedItem}"
+                      ItemsSource="{Binding Path=EnclosingStructureMaterials}"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Материал"
+                                        Binding="{Binding Material.MaterialName}"/>
+
+                    <DataGridTextColumn Header="Толщина"
+                                        Binding="{Binding LayerThickness}"/>
+
+                    <DataGridTextColumn Header="Ri, м2*С/Вт"
+                                        Binding="{Binding RLayer, StringFormat={}{0:F3}}"/>
+
+                    <DataGridTextColumn Header="Di"
+                                        Binding="{Binding ThermalInertiaLayer, StringFormat={}{0:F3}}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        
+        <StatusBar Grid.Row="3">
+            <StatusBarItem HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Время запуска: " />
+                    <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{}{0:dd-MM-yyyy HH:mm:ss}'}" />
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
